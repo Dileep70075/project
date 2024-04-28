@@ -1,7 +1,23 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
 
 const Signup = () => {
+    const { data,setData} = useState({
+        name:'',
+        username: "",
+        email: "",
+        mobile: "",
+        gender: "",
+        dob: "",
+        password: "",
+        role: "",
+    });
+    const register = (e) =>{
+       const { name , value } = e.target;
+       setData ({...data,[name]: value }); 
+    };
+    const Navigate = useNavigate();
+    
   return (
     <div style={styles.container} className='signUp-container'>
    <form onSubmit={handleSubmit} style={styles.form} className="signup-form">
