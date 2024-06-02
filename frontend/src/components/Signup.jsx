@@ -1,10 +1,39 @@
 import React, { useState } from 'react'
-import { Link } from 'react-router-dom'
-
+import { Link, useNavigate } from 'react-router-dom'
+import axios from "axios";
 const Signup = () => {
    const [data ,setData] = useState({
-    
-   })
+    name: "",
+    username: "",
+    email: "",
+    mobile: "",
+    gender: "",
+    dob: "",
+    password: "",
+    role: "",
+   });
+   const register = (e) =>{
+    const { name , value } = e.target;
+    setData({...data, [name]:value});
+   };
+   const Navigate = useNavigate();
+   const handleSubmit = async (e) =>{
+    e.preventDefault();
+    try{
+const response = await axios.post('http://localhost:3007/signup',data);
+if(response && response.data){
+  Navigate('/Login');
+}
+    }
+    catch(error){
+      console.error("error durinng signnup", error);
+      if (error.response && error.response.data) {
+        console.error("Error details:", error.response.data);
+      } else {
+        console.log("Unexpecte error");
+      }
+    }
+   };
   return (
     <div style={styles.container} className='signUp-container'>
    <form onSubmit={handleSubmit} style={styles.form} className="signup-form">
