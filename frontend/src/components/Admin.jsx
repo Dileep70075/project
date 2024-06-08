@@ -1,5 +1,3 @@
-
-
 import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
@@ -35,7 +33,7 @@ const Admin = () => {
   const fetchData = async () => {
     try {
       const response = await axios.get(
-        `http://localhost:3007/studentData/${userId}`,
+        `http://localhost:3006/studentData/${userId}`,
         {
           params: { role: role, email: email },
         }
@@ -64,7 +62,7 @@ const Admin = () => {
 
   const deleteStudent = async (studentId) => {
     await axios
-      .delete(`http://localhost:3007/students/${studentId}`)
+      .delete(`http://localhost:3006/students/${studentId}`)
       .then((response) => {
         fetchData();
         // console.log( "StudentId",response.data)

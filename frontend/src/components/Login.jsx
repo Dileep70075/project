@@ -1,30 +1,36 @@
-import axios from "axios";
-import React, { useState } from "react"
-import { Link, useNavigate } from "react-router-dom";
+import axios from 'axios'
+import React, { useState } from 'react'
+import { Link, useNavigate } from 'react-router-dom'
+
 const Login = () => {
-    const [data,setData] = useState({
-        username:'',
-        password:'',
-    })
-    const login = (e) =>{
-        const {name,value} = e.target;
-        setData({...data,[name]:value})
-    }
-    const Navigate = useNavigate();
-    const handleLogin = async (e) =>{
-        e.preventDefault();
-        try{
-const response = await axios.post("http://localhost:3007/login",data);
-if(response && response.data){
-    console.log(response.data);
-    localStorage.setItem('userData',JSON.stringify(response.data))
-    Navigate('/admin');
+const [data, setData] = useState({
+    username:'',
+    password:'',
+})
+const login =(e)=>{
+    const {name,value} =e.target;
+    setData({...data,[name]:value})
 }
-        }
-        catch(error){
-console.error('error during login',error)
-        }
-    }
+const Navigate = useNavigate()
+const handleLogin = async (e) => {
+  e.preventDefault();
+  try {
+      const response = await axios.post('http://localhost:3006/login', data);
+      if (response && response.data) {
+          console.log(response.data);
+
+          // Set user data in localStorage
+          localStorage.setItem('userData', JSON.stringify(response.data));
+
+          // Navigate to '/admin'
+          Navigate('/admin');
+      }
+  } catch (error) {
+      console.error('Error during login', error);
+  }
+};
+
+
   return (
     <div className='signup-container' >
         <form onSubmit={handleLogin} className='signup-form'>
