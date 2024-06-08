@@ -100,6 +100,12 @@ app.post("/addStudentForm", async (req, res) => {
       res.status(500).json({ message: "internal server error" });
     }
   });
+
+
+
+
+
+
 //   student data get api
   app.get('/studentData/:userId',async (req,res) => {
     const {role,email} = req.query
@@ -127,6 +133,13 @@ catch(error){
     res.status(500).json({ message: "Internal Server Error" });
 }
   });
+
+
+
+
+
+
+
 //   delete student and move recylcle bin
 app.delete('/students/:id',async(req,res) => {
     const studentId = req.params.id;
@@ -147,6 +160,12 @@ else{
         res.status(500).json({ message: 'Internal Server Error' }); 
     }
 })
+
+
+
+
+
+
 
 // Delete recycle bin item permanently
 app.delete('/recycleBin/:id', async (req, res) => {
@@ -169,6 +188,11 @@ app.delete('/recycleBin/:id', async (req, res) => {
     }
   });
   
+
+
+
+
+
   
   // Get recycle bin data
   app.get("/recycleBinData", async (req, res) => {

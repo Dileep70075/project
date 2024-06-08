@@ -95,7 +95,7 @@ if(response && response.data){
       <button type="submit" style={styles.button}> Submit
       </button>
       </form>
-      <p className='p'>Already have account ? {" "} <Link to='/login' className='span'></Link></p>
+      <p className='p'>Already have account ? {" "} <Link to='/login' className='span'>login</Link></p>
     </div>
   )
 }
