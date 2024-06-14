@@ -3,32 +3,20 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 
 const Admin = () => {
-  // Retrieve user data from localStorage
   const userDataString = localStorage.getItem("userData");
-  // State to store the fetched student data
   const [submittedData, setSubmittedData] = useState([]);
-  // State to store the user ID
   const [user, setUser] = useState("");
   const userId = user._id;
   const role = user.role;
   const email = user.email;
-  // const [recycleBin, setRecycleBin] = useState([]);
-
-  // Check if userDataString is not null or undefined
   useEffect(() => {
     if (userDataString) {
-      // Parse the JSON string to convert it back to a JavaScript object
       const userData = JSON.parse(userDataString);
-
-      // Extract the user ID from userData and set it in the state
       setUser(userData.user);
     } else {
-      // Handle the case when there is no user data in localStorage
       console.log("User data not found in localStorage");
     }
-  }, [userDataString]); // Trigger the effect when userDataString changes
-
-  // Fetch student data based on the user ID
+  }, [userDataString]); 
 
   const fetchData = async () => {
     try {
@@ -47,25 +35,21 @@ const Admin = () => {
       } else {
         setSubmittedData(response.data.student);
       }
-      // console.log('studentAll',response.data.studentAll);
     } catch (error) {
       console.error("Error fetching data:", error);
     }
   };
-
-  // Fetch data only if the user ID is available
   useEffect(() => {
     if (userId && role) {
       fetchData();
     }
-  }, [userId, role]); // Trigger the effect when userId changes
+  }, [userId, role]);
 
   const deleteStudent = async (studentId) => {
     await axios
       .delete(`http://localhost:3006/students/${studentId}`)
       .then((response) => {
         fetchData();
-        // console.log( "StudentId",response.data)
       })
       .catch((error) => console.error(error));
   };

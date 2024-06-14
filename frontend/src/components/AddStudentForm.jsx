@@ -14,7 +14,6 @@ if (userDataString) {
     // Now you can use the userData object in your component
     console.log(userData);
     var id=(userData.user._id)
-    //  const userId=(userData);
     console.log(id)
 } else {
     // Handle the case when there is no user data in localStorage
