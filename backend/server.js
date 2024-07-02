@@ -158,30 +158,30 @@ app.get("/studentData/:userId", async (req, res) => {
 
 
 // Delete student and move to recycle bin
-// app.delete('/students/:id', async (req, res) => {
-//   const studentId = req.params.id;
+app.delete('/students/:id', async (req, res) => {
+  const studentId = req.params.id;
 
-//   try {
-//     const deletedStudent = await Student.findOne({ _id: studentId });
-//     console.log(deletedStudent)
+  try {
+    const deletedStudent = await Student.findOne({ _id: studentId });
+    console.log(deletedStudent)
 
-//     if (deletedStudent) {
-//       // Save the deleted student to the RecycleBinItem collection
-//       const recycleBinItem = new RecycleBinItem(deletedStudent.toObject());
-//       await recycleBinItem.save();
+    if (deletedStudent) {
+      // Save the deleted student to the RecycleBinItem collection
+      const recycleBinItem = new RecycleBinItem(deletedStudent.toObject());
+      await recycleBinItem.save();
 
-//       // Delete the student from the Student collection
-//       await Student.deleteOne({ _id: studentId });
+      // Delete the student from the Student collection
+      await Student.deleteOne({ _id: studentId });
 
-//       res.json(deletedStudent);
-//     } else {
-//       res.status(404).json({ error: 'Student not found' });
-//     }
-//   } catch (error) {
-//     console.error("Error during student deletion", error);
-//     res.status(500).json({ message: 'Internal Server Error' });
-//   }
-// });
+      res.json(deletedStudent);
+    } else {
+      res.status(404).json({ error: 'Student not found' });
+    }
+  } catch (error) {
+    console.error("Error during student deletion", error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
 
 
 
@@ -191,25 +191,25 @@ app.get("/studentData/:userId", async (req, res) => {
 
 
 // Delete recycle bin item permanently
-// app.delete('/recycleBin/:id', async (req, res) => {
-//   const recycleBinItemId = req.params.id;
+app.delete('/recycleBin/:id', async (req, res) => {
+  const recycleBinItemId = req.params.id;
 
-//   try {
-//     const deletedRecycleBinItem = await RecycleBinItem.findOne({ _id: recycleBinItemId });
+  try {
+    const deletedRecycleBinItem = await RecycleBinItem.findOne({ _id: recycleBinItemId });
 
-//     if (deletedRecycleBinItem) {
-//       // Delete the recycle bin item permanently
-//       await RecycleBinItem.deleteOne({ _id: recycleBinItemId });
+    if (deletedRecycleBinItem) {
+      // Delete the recycle bin item permanently
+      await RecycleBinItem.deleteOne({ _id: recycleBinItemId });
 
-//       res.json({ message: 'Recycle bin item deleted permanently' });
-//     } else {
-//       res.status(404).json({ error: 'Recycle bin item not found' });
-//     }
-//   } catch (error) {
-//     console.error("Error during recycle bin item deletion", error);
-//     res.status(500).json({ message: 'Internal Server Error' });
-//   }
-// });
+      res.json({ message: 'Recycle bin item deleted permanently' });
+    } else {
+      res.status(404).json({ error: 'Recycle bin item not found' });
+    }
+  } catch (error) {
+    console.error("Error during recycle bin item deletion", error);
+    res.status(500).json({ message: 'Internal Server Error' });
+  }
+});
 
 
 
@@ -219,12 +219,12 @@ app.get("/studentData/:userId", async (req, res) => {
 
 
 // Get recycle bin data
-// app.get("/recycleBinData", async (req, res) => {
-//   try {
-//     const recycleBinData = await RecycleBinItem.find();
-//     res.json({ recycleBinData });
-//   } catch (error) {
-//     console.error("Error during fetching recycle bin data", error);
-//     res.status(500).json({ message: "Internal Server Error" });
-//   }
-// });
+app.get("/recycleBinData", async (req, res) => {
+  try {
+    const recycleBinData = await RecycleBinItem.find();
+    res.json({ recycleBinData });
+  } catch (error) {
+    console.error("Error during fetching recycle bin data", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+});
